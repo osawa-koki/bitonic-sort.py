@@ -1,0 +1,23 @@
+
+name: exec
+
+on:
+  workflow_dispatch:
+  push:
+    tags: [v-*]
+
+env:
+  python-version: 3.9
+
+jobs:
+  exec:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Use Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ env.python-version }}
+      - name: Exec program
+        run: python main.py
